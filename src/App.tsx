@@ -4,7 +4,7 @@ import { Container, MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Calendar from './components/pages/Appointment/Calendar';
 import EditAppointment from './components/pages/Appointment/EditAppointment';
@@ -32,6 +32,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   dayjs.locale('pl');
+  const location = useLocation()
   return (
     <MantineProvider
       theme={{
@@ -52,7 +53,7 @@ const App = () => {
             style={{ position: 'relative' }}
           >
             <SideMenu />
-            <Routes>
+            <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />
