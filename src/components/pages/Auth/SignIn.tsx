@@ -11,14 +11,15 @@ import {
   Title,
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+
 import { FormEvent } from 'react';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { signInSchema as schema } from '../../../helpers/schemas';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { signInSchema as schema } from '../../../helpers/schemas';
-
-const URL = 'http://localhost:8080/api/users/login';
+const URL = `${domainURL}/api/users/login`;
 
 type loginValues = {
   email: string;

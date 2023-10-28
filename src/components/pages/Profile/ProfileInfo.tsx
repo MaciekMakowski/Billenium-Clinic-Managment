@@ -11,27 +11,28 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
+import { ChangeEvent, useReducer, useState } from 'react';
 import { IconPlus, IconX } from '@tabler/icons-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { ChangeEvent, useReducer, useState } from 'react';
-import { IMaskInput } from 'react-imask';
-
-import ConfirmModal from '../../../components/UI/ConfirmModal';
-import { fetchUserInfo } from '../../../helpers/queries';
 import {
   userProfileInitialValues,
   userProfileReducer,
 } from '../../../helpers/reducers';
-import { UserProfileInfoType } from '../../../helpers/types';
+
+import ConfirmModal from '../../../components/UI/ConfirmModal';
+import { IMaskInput } from 'react-imask';
 import ModalAllergy from './ModalAllergy';
 import ModalMedicines from './ModalMedicines';
+import { UserProfileInfoType } from '../../../helpers/types';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { fetchUserInfo } from '../../../helpers/queries';
+import { useViewportSize } from '@mantine/hooks';
 
 // type DoctorListProps = {
 
 // };
-const URL = 'http://localhost:8080/api/patients/';
+const URL = `${domainURL}/api/patients/`;
 const fetchUserData = () =>
   fetchUserInfo(URL, sessionStorage.getItem('patientId'));
 const emailRegex = new RegExp(

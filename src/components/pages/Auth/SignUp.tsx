@@ -10,19 +10,20 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
-import { useForm, zodResolver } from '@mantine/form';
-import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import dayjs from 'dayjs';
 import { FormEvent, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useForm, zodResolver } from '@mantine/form';
+
+import ConfirmModal from '../../UI/ConfirmModal';
+import { DateInput } from '@mantine/dates';
+import { UserCreationErrorType } from '../../../helpers/types';
+import dayjs from 'dayjs';
+import { domainURL } from '../../../helpers/url';
+import { signUpSchema as schema } from '../../../helpers/schemas';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { signUpSchema as schema } from '../../../helpers/schemas';
-import ConfirmModal from '../../UI/ConfirmModal';
-import { UserCreationErrorType } from '../../../helpers/types';
-
-const URL = 'http://localhost:8080/api/users';
+const URL = `${domainURL}/api/users`;
 
 type registerValues = {
   firstName: string;

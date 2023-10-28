@@ -1,4 +1,8 @@
 import {
+  AppointmentDeclineError,
+  AppointmentResponseType,
+} from '../../../helpers/types';
+import {
   Button,
   Center,
   Container,
@@ -9,23 +13,20 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AppointmentStatus } from '../../../helpers/enums';
-import {
-  AppointmentDeclineError,
-  AppointmentResponseType,
-} from '../../../helpers/types';
 import ConfirmModal from '../../UI/ConfirmModal';
 import { FlexibleAccordion } from '../../UI/FlexibleAccordion';
+import { domainURL } from '../../../helpers/url';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const CHANGE_APPOINTMENT_STATUS = 'http://localhost:8080/api/appointments';
+const CHANGE_APPOINTMENT_STATUS = `${domainURL}/api/appointments`;
 
 export const VisitsList = () => {
-  const NEW_APPOINTMENT_URL = `http://localhost:8080/api/patients/${sessionStorage.getItem(
+  const NEW_APPOINTMENT_URL = `${domainURL}/api/patients/${sessionStorage.getItem(
     'patientId'
   )}/appointments?limit=30`;
 

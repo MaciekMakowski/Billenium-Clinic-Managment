@@ -1,4 +1,8 @@
 import {
+  AppointmentResponseType,
+  UserProfileInfoType,
+} from '../../../helpers/types';
+import {
   Button,
   Center,
   Container,
@@ -8,18 +12,15 @@ import {
   ScrollArea,
   Text,
 } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  AppointmentResponseType,
-  UserProfileInfoType,
-} from '../../../helpers/types';
 import { FlexibleAccordion } from '../../UI/FlexibleAccordion';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
-const PATIENT_INFO_URL = 'http://localhost:8080/api/patients';
+const PATIENT_INFO_URL = `${domainURL}/api/patients`;
 const infoBorder = { borderLeft: '2px solid #fd7e14' };
 
 const PatientProfileInfo = () => {
@@ -32,7 +33,7 @@ const PatientProfileInfo = () => {
     const response = await axios.get(`${PATIENT_INFO_URL}/${patientId}`);
     return response.data as UserProfileInfoType;
   };
-  const NEW_APPOINTMENT_URL = `http://localhost:8080/api/patients/${patientId}/appointments`;
+  const NEW_APPOINTMENT_URL = `${domainURL}/api/patients/${patientId}/appointments`;
 
   const fetchNewAppointments = async () => {
     const response = await axios.get(NEW_APPOINTMENT_URL);

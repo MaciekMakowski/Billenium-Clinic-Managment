@@ -1,7 +1,4 @@
 import { Button, Container, Flex } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { useState } from 'react';
 import {
   Outlet,
   useLocation,
@@ -9,14 +6,19 @@ import {
   useOutletContext,
 } from 'react-router-dom';
 
-import { clearAppointmentData } from '../../../helpers/functions';
 import AppointmentStepper from '../../UI/AppointmentStepper';
 import ConfirmModal from '../../UI/ConfirmModal';
+import axios from 'axios';
+import { clearAppointmentData } from '../../../helpers/functions';
+import { domainURL } from '../../../helpers/url';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+
 type ContexType = {
   doctorId: string;
 };
 
-const URL = 'http://localhost:8080/api/appointments';
+const URL = `${domainURL}/api/appointments`;
 
 const Layout = () => {
   const [active, setActive] = useState(1);

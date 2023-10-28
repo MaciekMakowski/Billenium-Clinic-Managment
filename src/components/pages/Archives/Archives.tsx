@@ -1,4 +1,8 @@
 import {
+  AppointmentResponseType,
+  DoctorListType,
+} from '../../../helpers/types';
+import {
   Button,
   Center,
   Flex,
@@ -8,22 +12,19 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import dayjs from 'dayjs';
-import { useState } from 'react';
 
 import { AppointmentStatus } from '../../../helpers/enums';
-import {
-  AppointmentResponseType,
-  DoctorListType,
-} from '../../../helpers/types';
+import { DateInput } from '@mantine/dates';
 import { FlexibleAccordion } from '../../UI/FlexibleAccordion';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { domainURL } from '../../../helpers/url';
 import { isWeekend } from '../Appointment/Calendar';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
-const AllAppointmentsURL = 'http://localhost:8080/api/appointments/all';
-const DOCTORS_URL = 'http://localhost:8080/api/doctors';
+const AllAppointmentsURL = `${domainURL}/api/appointments/all`;
+const DOCTORS_URL = `${domainURL}/api/doctors`;
 
 const Archives = () => {
   const [selectedDoctorName, setSelectedDoctorName] = useState<string | null>(

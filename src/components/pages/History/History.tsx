@@ -7,15 +7,16 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 import { AppointmentResponseType } from '../../../helpers/types';
 import { FlexibleAccordion } from '../../UI/FlexibleAccordion';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 export const History = () => {
-  const DONE_APPOINTMENT_URL = `http://localhost:8080/api/patients/${sessionStorage.getItem(
+  const DONE_APPOINTMENT_URL = `${domainURL}/api/patients/${sessionStorage.getItem(
     'patientId'
   )}/appointments?status=done`;
 

@@ -1,14 +1,15 @@
-import { Flex, Loader, Text } from '@mantine/core';
-import { ResponsivePie } from '@nivo/pie';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useEffect,useState } from 'react';
-import { useLocation } from 'react-router-dom';
-
 import { ChartType, ClinicStats, DoctorsStats } from '../../../helpers/types';
+import { Flex, Loader, Text } from '@mantine/core';
+import { useEffect, useState } from 'react';
+
+import { ResponsivePie } from '@nivo/pie';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const fetchStats = async () => {
-  const response = await axios.get("http://localhost:8080/api/appointments/clinic-stats")
+  const response = await axios.get(`${domainURL}/api/appointments/clinic-stats`)
   return response.data as ClinicStats
 }
 type statsSource = {

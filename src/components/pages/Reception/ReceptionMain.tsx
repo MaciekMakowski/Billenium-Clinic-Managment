@@ -1,11 +1,3 @@
-import { Center, Flex, Loader, ScrollArea, Select, Text } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import dayjs from 'dayjs';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import {
   AppointmentDeclineError,
   AppointmentResponseType,
@@ -13,17 +5,26 @@ import {
   PatientPESELListType,
   UserProfileInfoType,
 } from '../../../helpers/types';
+import { Center, Flex, Loader, ScrollArea, Select, Text } from '@mantine/core';
+import axios, { AxiosError } from 'axios';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
 import ConfirmModal from '../../UI/ConfirmModal';
+import DoctorItem from './DoctorItem';
 import { FlexibleAccordion } from '../../UI/FlexibleAccordion';
 import Statistics from '../Statistics/Statistics';
-import DoctorItem from './DoctorItem';
 import UserSearch from './UserSearch';
+import dayjs from 'dayjs';
+import { domainURL } from '../../../helpers/url';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useViewportSize } from '@mantine/hooks';
 
 const BREAKPOINT = 1080;
-const DOCTORS_URL = 'http://localhost:8080/api/doctors';
-const NEW_APPOINTMENTS = 'http://localhost:8080/api/appointments/new';
-const CHANGE_APPOINTMENT_STATUS = 'http://localhost:8080/api/appointments';
-const PATIENTS_URL = 'http://localhost:8080/api/patients';
+const DOCTORS_URL = `${domainURL}/api/doctors`;
+const NEW_APPOINTMENTS = `${domainURL}/api/appointments/new`;
+const CHANGE_APPOINTMENT_STATUS = `${domainURL}/api/appointments`;
+const PATIENTS_URL = `${domainURL}/api/patients`;
 
 const ReceptionMain = () => {
   const { width } = useViewportSize();
@@ -61,7 +62,7 @@ const ReceptionMain = () => {
   const todaysDate = dayjs(new Date()).format('YYYY-MM-DD').toString();
   const fetchDoctorTodayAppointments = async () => {
     const response = await axios.get(
-      `http://localhost:8080/api/doctors/${selectedDoctorId}/appointments?appointmentDate=${todaysDate}`
+      `${domainURL}/api/doctors/${selectedDoctorId}/appointments?appointmentDate=${todaysDate}`
     );
     return response.data as AppointmentResponseType[];
   };

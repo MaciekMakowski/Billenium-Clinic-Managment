@@ -1,17 +1,18 @@
 import { Box, Button, Center, Flex, Loader, Text, Title } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-import { DoctorListType } from '../../../helpers/types';
 import AppointmentStepper from '../../UI/AppointmentStepper';
 import Doctor from './Doctor';
+import { DoctorListType } from '../../../helpers/types';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 type DoctorListProps = {
   specialization: string;
 };
 const URL =
-  'http://localhost:8080/api/doctors/by-specialization?specialization=';
+ `${domainURL}/api/doctors/by-specialization?specialization=`;
 
 export const DoctorList = ({ specialization }: DoctorListProps) => {
   const navigate = useNavigate();

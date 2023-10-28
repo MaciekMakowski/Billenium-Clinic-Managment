@@ -6,14 +6,15 @@ import {
   Transition,
   UnstyledButton,
 } from '@mantine/core';
+import dayjs, { Dayjs } from 'dayjs';
+
 import { Box } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import dayjs, { Dayjs } from 'dayjs';
-import { useState } from 'react';
-
+import { domainURL } from '../../../helpers/url';
 import { useDoctorId } from './Layout';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 type TimePickerTypes = {
   appointmentDate: string;
@@ -38,7 +39,7 @@ export function isWeekend(date: Dayjs): boolean {
   return dayOfWeek === 6 || dayOfWeek === 0;
 }
 
-const URL = 'http://localhost:8080/api/appointments/busy_at?';
+const URL = `${domainURL}/api/appointments/busy_at?`;
 
 const fetchHours = async (date: string, doctorId: string) => {
   const response = await axios.get(

@@ -1,41 +1,42 @@
 import {
+  AppointmentResponseType,
+  DoctorInfoType,
+  UserProfileInfoType,
+} from '../../../helpers/types';
+import {
   Avatar,
   Box,
   Button,
   Center,
   Container,
-  createStyles,
   Drawer,
   Flex,
   Group,
   Input,
   Loader,
-  rem,
   ScrollArea,
   Table,
   Text,
-  Textarea,
   TextInput,
+  Textarea,
   Title,
+  createStyles,
+  rem,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { ChangeEvent, useState } from 'react';
 import { IconDownload, IconSearch, IconSettings } from '@tabler/icons-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
+
+import ConfirmModal from '../../UI/ConfirmModal';
+import DoctorTodayAppointmentPDF from './DoctorTodayAppointmentPDF';
+import { IMaskInput } from 'react-imask';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Statistics from '../Statistics/Statistics';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { ChangeEvent, useState } from 'react';
-import { IMaskInput } from 'react-imask';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-import {
-  AppointmentResponseType,
-  DoctorInfoType,
-  UserProfileInfoType,
-} from '../../../helpers/types';
-import ConfirmModal from '../../UI/ConfirmModal';
-import Statistics from '../Statistics/Statistics';
-import DoctorTodayAppointmentPDF from './DoctorTodayAppointmentPDF';
+import { domainURL } from '../../../helpers/url';
+import { useDisclosure } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -65,9 +66,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 const photoUrlRegex = new RegExp(/^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm);
-const DOCTOR_URL = 'http://localhost:8080/api/doctors/';
-const DOCTOR_PATIENTS_URL = 'http://localhost:8080/api/patients/by-doctor/';
-const DOCTOR_VISITS_URL = 'http://localhost:8080/api/doctors/';
+const DOCTOR_URL = `${domainURL}/api/doctors/`;
+const DOCTOR_PATIENTS_URL = `${domainURL}/api/patients/by-doctor/`;
+const DOCTOR_VISITS_URL = `${domainURL}/api/doctors/`;
 
 export const DoctorProfile = () => {
   const userRole = sessionStorage.getItem('role');

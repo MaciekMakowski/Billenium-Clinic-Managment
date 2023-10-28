@@ -3,20 +3,21 @@ import {
   Center,
   Flex,
   Loader,
-  Textarea,
   TextInput,
+  Textarea,
   Title,
 } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AppointmentResponseType } from '../../../helpers/types';
 import ConfirmModal from '../../UI/ConfirmModal';
+import axios from 'axios';
+import { domainURL } from '../../../helpers/url';
+import { useState } from 'react';
+import { useViewportSize } from '@mantine/hooks';
 
-const FETCH_APPOINTMENT_URL = 'http://localhost:8080/api/appointments/';
+const FETCH_APPOINTMENT_URL = `${domainURL}/api/appointments/`;
 
 const EditAppointment = () => {
   const { width } = useViewportSize();
