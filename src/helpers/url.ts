@@ -1,3 +1,3 @@
 
 
-export const domainURL = "https://klinika-qv95u.ondigitalocean.app/"
+export const domainURL = "https://klinika-qv95u.ondigitalocean.app"
